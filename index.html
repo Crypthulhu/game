@@ -1,15 +1,108 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Animation Hélicoïdale</title>
-    <style>
-        body { margin: 0; }
-        canvas { display: block; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeu Lovecraft</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .hidden {
+    display: none;
+  }
+  #inventory {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  #diceRoll {
+    margin-bottom: 20px;
+  }
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+  #message {
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+</style>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="app.js"></script>
+<h1>Jeu inspiré de Lovecraft</h1>
+<div id="inventory">
+  <h2>Inventaire :</h2>
+  <ul>
+    <li>Lettre du Dr. Morgan</li>
+    <li>Revolver (6 balles)</li>
+    <li>Lampe torche</li>
+    <li>Carnet de notes</li>
+  </ul>
+</div>
+<div id="diceRoll" class="hidden">
+  <button onclick="rollDice()">Lancer le dé</button>
+  <p id="diceResult"></p>
+</div>
+<div id="message"></div>
+<div id="choices">
+  <button onclick="choice1()">1. Rencontrer le Dr. Morgan</button>
+  <button onclick="choice2()">2. Enquêter sur le Dr. Morgan et sa famille</button>
+</div>
+<script>
+  const inventory = document.querySelector("#inventory ul");
+  const message = document.querySelector("#message");
+  const diceRoll = document.querySelector("#diceRoll");
+  const diceResult = document.querySelector("#diceResult");
+
+  function rollDice() {
+    const roll = Math.floor(Math.random() * 6) + 1;
+    diceResult.textContent = `Résultat du lancer de dé : ${roll}`;
+
+    if (diceRoll.getAttribute("data-event") === "cat") {
+      if (roll <= 3) {
+        message.textContent = "Vous parvenez à garder l'équilibre et à éviter de tomber.";
+      } else {
+        message.textContent = "Vous tombez et vous blessez légèrement à la main.";
+        addToInventory("Bandage");
+      }
+    } else if (diceRoll.getAttribute("data-event") === "research") {
+      if (roll <= 3) {
+        message.textContent = "Vous trouvez un article de journal relatant un incident impliquant le Dr. Morgan et un objet occulte.";
+        addToInventory("Article de journal sur le Dr. Morgan");
+      } else {
+        message.textContent = "Vous rencontrez un informateur qui vous met en garde contre le Dr. Morgan et sa famille.";
+      }
+    }
+    diceRoll.classList.add("hidden");
+  }
+
+  function addToInventory(item) {
+    const li = document.createElement("li");
+    li.textContent = item;
+    inventory.appendChild(li);
+  }
+
+  function choice1() {
+    message.textContent= "Vous vous rendez au domicile du Dr. Morgan, une vieille demeure victorienne qui semble abandonnée. En montant les marches du perron, un chat noir surgit soudain de l'ombre et vous fait trébucher.";
+document.querySelector("#choices").classList.add("hidden");
+diceRoll.classList.remove("hidden");
+diceRoll.setAttribute("data-event", "cat");
+}
+
+function choice2() {
+message.textContent = "Vous commencez à enquêter sur le Dr. Morgan et sa famille. Vous découvrez que sa famille est liée à des rumeurs de sorcellerie et que plusieurs membres sont morts dans des circonstances mystérieuses.";
+document.querySelector("#choices").classList.add("hidden");
+diceRoll.classList.remove("hidden");
+diceRoll.setAttribute("data-event", "research");
+}
+</script>
+
 </body>
 </html>
