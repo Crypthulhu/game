@@ -82,17 +82,20 @@
   </div>
   <div id="message"></div>
   <div id="choices">
-    <button onclick="choice1()">1. Rencontrer le Dr. Morgan</button>
-    <button onclick="choice2()">2. Enquêter sur le Dr. Morgan et sa famille</button>
- </div>
+    <button id="choice1">1. Rencontrer le Dr. Morgan</button>
+    <button id="choice2">2. Enquêter sur le Dr. Morgan et sa famille</button>
+  </div>
 </div>
 <script>
-  const intro = document.querySelector("#intro");
-  const sceneImg = document.querySelector("#sceneImg");
-  const inventory = document.querySelector("#inventory ul");
-  const message = document.querySelector("#message");
-  const diceRoll = document.querySelector("#diceRoll");
-  const diceResult = document.querySelector("#diceResult");
+ const intro = document.querySelector("#intro");
+const sceneImg = document.querySelector("#sceneImg");
+const inventory = document.querySelector("#inventory ul");
+const message = document.querySelector("#message");
+const diceRoll = document.querySelector("#diceRoll");
+const diceResult = document.querySelector("#diceResult");
+const choice1Button = document.querySelector("#choice1");
+const choice2Button = document.querySelector("#choice2");
+
 function updateSceneImage(src) {
 sceneImg.src = src;
 }
@@ -100,7 +103,7 @@ sceneImg.src = src;
 function rollDice() {
 const roll = Math.floor(Math.random() * 6) + 1;
 diceResult.textContent = Résultat du lancer de dé : ${roll};
-  if (diceRoll.getAttribute("data-event") === "cat") {
+if (diceRoll.getAttribute("data-event") === "cat") {
   if (roll <= 3) {
     message.textContent = "Vous parvenez à garder l'équilibre et à éviter de tomber.";
   } else {
@@ -141,7 +144,10 @@ document.querySelector("#choices").classList.add("hidden");
 diceRoll.classList.remove("hidden");
 diceRoll.setAttribute("data-event", "research");
 }
-</script>
 
+choice1Button.addEventListener("click", choice1);
+choice2Button.addEventListener("click", choice2);
+
+</script>
 </body>
 </html>
