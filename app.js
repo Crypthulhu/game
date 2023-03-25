@@ -8,6 +8,10 @@ document.body.appendChild(renderer.domElement);
 // Liste de mots
 const words = ['Bloc 1', 'Bloc 2', 'Bloc 3', 'Bloc 4', 'Bloc 5', 'Bloc 6', 'Bloc 7'];
 
+// Créer une lumière ambiante
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+scene.add(ambientLight);
+
 // Créer des objets 3D pour chaque mot
 const textMeshes = [];
 const loader = new THREE.FontLoader();
