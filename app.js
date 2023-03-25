@@ -34,13 +34,15 @@ function animate() {
     const time = Date.now() * 0.001;
     const radius = 5;
     const angle = Math.PI * 2 / words.length;
+    const helixOffset = Math.PI / words.length; // Ajout de l'offset pour la double hélice
 
     for (let i = 0; i < textMeshes.length; i++) {
         const textMesh = textMeshes[i];
         const x = radius * Math.sin(angle * i + time);
+        const y = i * 0.75; // Position verticale des mots
         const z = radius * Math.cos(angle * i + time);
-        textMesh.position.set(x, 0, z);
-        textMesh.lookAt(camera.position);
+        textMesh.position.set(x, y, z);
+        textMesh.rotation.y = angle * i + helixOffset + time; // Rotation des mots pour les orienter le long de la double hélice
     }
 
     renderer.render(scene, camera);
