@@ -87,7 +87,7 @@
   </div>
 </div>
 <script>
- const intro = document.querySelector("#intro");
+const intro = document.querySelector("#intro");
 const sceneImg = document.querySelector("#sceneImg");
 const inventory = document.querySelector("#inventory ul");
 const message = document.querySelector("#message");
@@ -102,7 +102,7 @@ sceneImg.src = src;
 
 function rollDice() {
 const roll = Math.floor(Math.random() * 6) + 1;
-diceResult.textContent = Résultat du lancer de dé : ${roll};
+diceResult.textContent = Résultat du lancer de dé : ${roll}; 
 if (diceRoll.getAttribute("data-event") === "cat") {
   if (roll <= 3) {
     message.textContent = "Vous parvenez à garder l'équilibre et à éviter de tomber.";
