@@ -8,7 +8,7 @@ document.body.appendChild(renderer.domElement);
 // Liste de mots
 const words = ['Bloc 1', 'Bloc 2', 'Bloc 3', 'Bloc 4', 'Bloc 5', 'Bloc 6', 'Bloc 7'];
 
-// Créer une lumière ambiante
+// Créez une lumière ambiante
 const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(ambientLight);
 
@@ -23,7 +23,7 @@ loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json
             size: 0.5,
             height: 0.1,
         });
-        const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const textMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff }); // Utilisez THREE.MeshLambertMaterial au lieu de THREE.MeshBasicMaterial
         const textMesh = new THREE.Mesh(textGeometry, textMaterial);
         textMeshes.push(textMesh);
         scene.add(textMesh);
@@ -55,3 +55,4 @@ function animate() {
 }
 
 animate();
+
