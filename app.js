@@ -6,7 +6,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Liste de mots
-const words = ['Bonjour', 'Animation', 'Lovecraft', 'ADN', 'Exemple', 'Créativité', 'Graphique'];
+const words = ['Bloc 1', 'Bloc 2', 'Bloc 3', 'Bloc 4', 'Bloc 5', 'Bloc 6', 'Bloc 7'];
 
 // Créer des objets 3D pour chaque mot
 const textMeshes = [];
@@ -26,23 +26,25 @@ loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json
     }
 });
 
-camera.position.z = 10;
+camera.position.z = 8;
 
 function animate() {
     requestAnimationFrame(animate);
 
     const time = Date.now() * 0.001;
-    const radius = 5;
-    const angle = Math.PI * 2 / words.length;
-    const helixOffset = Math.PI / words.length; // Ajout de l'offset pour la double hélice
+    const spacing = 2; // Espace entre les blocs
 
     for (let i = 0; i < textMeshes.length; i++) {
         const textMesh = textMeshes[i];
-        const x = radius * Math.sin(angle * i + time);
-        const y = i * 0.75; // Position verticale des mots
-        const z = radius * Math.cos(angle * i + time);
-        textMesh.position.set(x, y, z);
-        textMesh.rotation.y = angle * i + helixOffset + time; // Rotation des mots pour les orienter le long de la double hélice
+        const x = i * spacing - time * 2;
+        textMesh.position.set(x, 0, 0);
+    }
+
+    // Réinitialiser la position du premier bloc lorsqu'il sort de l'écran
+    const firstTextMesh = textMeshes[0];
+    if (firstTextMesh.position.x < -spacing * (words.length - 1)) {
+        firstTextMesh.position.x = (words.length - 1) * spacing;
+        textMeshes.push(textMeshes.shift());
     }
 
     renderer.render(scene, camera);
