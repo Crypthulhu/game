@@ -62,6 +62,7 @@
 <body>
 <div class="container">
   <h1>Jeu inspiré de Lovecraft</h1>
+  <p id="intro">Après avoir reçu une mystérieuse lettre du Dr. Morgan, un éminent chercheur dans le domaine de l'occultisme, vous décidez de vous rendre dans sa petite ville natale pour en savoir plus sur lui et ses recherches. Les rumeurs locales parlent de sombres secrets et d'événements étranges...</p>
   <div id="scene">
     <!-- Ajoutez vos images ici -->
     <img id="sceneImg" src="" alt="Illustration de la scène">
@@ -83,21 +84,20 @@
   <div id="choices">
     <button onclick="choice1()">1. Rencontrer le Dr. Morgan</button>
     <button onclick="choice2()">2. Enquêter sur le Dr. Morgan et sa famille</button>
-  </div>
+ </div>
 </div>
 <script>
+  const intro = document.querySelector("#intro");
   const sceneImg = document.querySelector("#sceneImg");
   const inventory = document.querySelector("#inventory ul");
   const message = document.querySelector("#message");
   const diceRoll = document.querySelector("#diceRoll");
   const diceResult = document.querySelector("#diceResult");
+function updateSceneImage(src) {
+sceneImg.src = src;
+}
 
-  function updateSceneImage(src) {
-    sceneImg.src = src;
-  }
-
-  function roll
-Dice() {
+function rollDice() {
 const roll = Math.floor(Math.random() * 6) + 1;
 diceResult.textContent = Résultat du lancer de dé : ${roll};
   if (diceRoll.getAttribute("data-event") === "cat") {
@@ -125,6 +125,7 @@ inventory.appendChild(li);
 }
 
 function choice1() {
+intro.classList.add("hidden");
 message.textContent = "Vous vous rendez au domicile du Dr. Morgan, une vieille demeure victorienne qui semble abandonnée. En montant les marches du perron, un chat noir surgit soudain de l'ombre et vous fait trébucher.";
 updateSceneImage("scene1.jpg"); // Remplacez "scene1.jpg" par le chemin de l'image que vous souhaitez afficher
 document.querySelector("#choices").classList.add("hidden");
@@ -133,6 +134,7 @@ diceRoll.setAttribute("data-event", "cat");
 }
 
 function choice2() {
+intro.classList.add("hidden");
 message.textContent = "Vous commencez à enquêter sur le Dr. Morgan et sa famille. Vous découvrez que sa famille est liée à des rumeurs de sorcellerie et que plusieurs membres sont morts dans des circonstances mystérieuses.";
 updateSceneImage("scene2.jpg"); // Remplacez "scene2.jpg" par le chemin de l'image que vous souhaitez afficher
 document.querySelector("#choices").classList.add("hidden");
