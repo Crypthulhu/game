@@ -6,7 +6,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // Liste de mots
-const words = ['Bonjour', 'Animation', 'Hélicoïdale', 'ADN', 'Exemple', 'Créativité', 'Graphique'];
+const words = ['Bonjour', 'Animation', 'Lovecraft', 'ADN', 'Exemple', 'Créativité', 'Graphique'];
 
 // Créer des objets 3D pour chaque mot
 const textMeshes = [];
